@@ -14,6 +14,7 @@ class State:
         self.size = 10
         self.starting_ore = 10
         self.max_ore = 500
+        self.step_num = 0
         self.seed = None
 
     def build_map(map_seed: int= None, size: int = 10): 

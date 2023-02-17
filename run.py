@@ -6,15 +6,17 @@ from implemented_agents import agents_map
 # PYTHON
 from argparse import ArgumentParser
 
+from mcts import run_mcts
 
-N_EPISODES = 100
+from copy import deepcopy
+
+N_EPISODES = 500
 
 def train(agent : Agent, env : Env, display = False, save_best = False):
-
     best_score = 0
     for episode in range(N_EPISODES):
         print(f"Episode {episode} starts.")
-
+        
         state = env.reset()
         done = False
         while not done:
@@ -32,21 +34,15 @@ def train(agent : Agent, env : Env, display = False, save_best = False):
             env.render()
 
             # Update state
-            state = next_state
+            state = deepcopy(next_state)
 
         print(f"Score : {env.score}")
-
+        if display:
+            env.final_render()
         if env.score > best_score:
             best_score = env.score
             if save_best:
                 env.save_solution()
-
-        if display:
-            env.final_render()
-        
-        
-        
-
 
 
 if __name__ == "__main__":
@@ -63,4 +59,5 @@ if __name__ == "__main__":
     # Create the agent
     agent = agents_map[agent_name](env)
     # Run the agent
-    train(agent, env)
+    train(agent, env, save_best=True)
+    run_mcts(agent_for_rollout=agent)
