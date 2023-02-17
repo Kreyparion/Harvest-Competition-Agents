@@ -5,6 +5,8 @@ This repository gives a solution to the [Harvest Competition](https://github.com
 
 For Installation and rules of the environment, you should read the [Readme](https://github.com/Kreyparion/Harvest-Competition#readme) of the competition
 
+We do a small change in the environment, by putting the step_number in the State instead of putting it in the Env.
+
 ## Agents
 
 Here we implemented some possible agents that were performing well on the environment.
